@@ -4,7 +4,7 @@
     "dependencies": {
         "cordova-android": "^7.1.0",
         "cordova-android-disable-aapt2": "^1.0.0",
-        "cordova-ios": "github:AyogoHealth/cordova-ios#CB-13143",
+        "cordova-ios": "^4.5.5",
         "cordova-plugin-ayogo-push": "github:AyogoHealth/cordova-plugin-ayogo-push",
         "cordova-plugin-code-push": "^1.11.9",
         "cordova-plugin-device": "^2.0.1",
