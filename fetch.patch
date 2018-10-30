@@ -1,0 +1,13 @@
+diff --git index.js index.js
+index 4853e2a..3e70bae 100644
+--- index.js
++++ index.js
+@@ -75,7 +75,7 @@ function installPackage (target, dest, opts) {
+ function npmArgs (target, userOptions) {
+     const opts = Object.assign({ production: true }, userOptions);
+ 
+-    const args = ['install', target];
++    const args = ['--loglevel verbose', 'install', target];
+ 
+     if (opts.production) {
+         args.push('--production');
