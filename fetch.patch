@@ -1,5 +1,5 @@
 diff --git index.js index.js
-index 4853e2a..a5be094 100644
+index 4853e2a..795b3a8 100644
 --- index.js
 +++ index.js
 @@ -64,9 +64,8 @@ function installPackage (target, dest, opts) {
@@ -13,12 +13,34 @@ index 4853e2a..a5be094 100644
          // Resolve path to installed package
          .then(getTargetPackageSpecFromNpmInstallOutput)
          .then(spec => pathToInstalledPackage(spec, dest));
-@@ -75,7 +74,7 @@ function installPackage (target, dest, opts) {
+@@ -75,18 +74,18 @@ function installPackage (target, dest, opts) {
  function npmArgs (target, userOptions) {
      const opts = Object.assign({ production: true }, userOptions);
  
 -    const args = ['install', target];
+-
+-    if (opts.production) {
+-        args.push('--production');
+-    }
+-    if (opts.save_exact) {
+-        args.push('--save-exact');
+-    } else if (opts.save) {
+-        args.push('--save');
+-    } else {
+-        args.push('--no-save');
+-    }
 +    const args = ['--verbose', 'install', target];
++
++    //if (opts.production) {
++    //    args.push('--production');
++    //}
++    //if (opts.save_exact) {
++    //    args.push('--save-exact');
++    //} else if (opts.save) {
++    //    args.push('--save');
++    //} else {
++    //    args.push('--no-save');
++    //}
+     return args;
+ }
  
-     if (opts.production) {
-         args.push('--production');
