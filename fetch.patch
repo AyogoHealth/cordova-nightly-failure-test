@@ -1,13 +1,22 @@
 diff --git index.js index.js
-index 4853e2a..a33aaf2 100644
+index 4853e2a..35420bc 100644
 --- index.js
 +++ index.js
-@@ -67,6 +67,12 @@ function installPackage (target, dest, opts) {
+@@ -54,6 +54,8 @@ module.exports = function (target, dest, opts = {}) {
+         });
+ };
+ 
++var modulecount = 0;
++
+ // Installs the package specified by target and returns the installation path
+ function installPackage (target, dest, opts) {
+     return isNpmInstalled()
+@@ -67,6 +69,12 @@ function installPackage (target, dest, opts) {
              return superspawn.spawn('npm', args, { cwd: dest });
          })
  
 +        .then(output => {
-+            fs.writeFileSync(`npm-${target}.log`, output, { encoding: 'utf8' });
++            fs.writeFileSync(`npm-${modulecount++}.log`, output, { encoding: 'utf8' });
 +
 +            return output;
 +        })
@@ -15,7 +24,7 @@ index 4853e2a..a33aaf2 100644
          // Resolve path to installed package
          .then(getTargetPackageSpecFromNpmInstallOutput)
          .then(spec => pathToInstalledPackage(spec, dest));
-@@ -75,7 +81,7 @@ function installPackage (target, dest, opts) {
+@@ -75,7 +83,7 @@ function installPackage (target, dest, opts) {
  function npmArgs (target, userOptions) {
      const opts = Object.assign({ production: true }, userOptions);
  
