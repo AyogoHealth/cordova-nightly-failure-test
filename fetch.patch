@@ -6,22 +6,18 @@ index 4853e2a..08e26cb 100644
  
  // Installs the package specified by target and returns the installation path
  function installPackage (target, dest, opts) {
-+    const { name, rawSpec } = npa(target, dest);
-+
      return isNpmInstalled()
          // Ensure that `npm` installs to `dest` and not any of its ancestors
          .then(_ => fs.ensureDir(path.join(dest, 'node_modules')))
  
          // Run `npm` to install requested package
--        .then(_ => npmArgs(target, opts))
-+        .then(_ => npmArgs(name, opts))
+         .then(_ => npmArgs(target, opts))
          .then(args => {
--            events.emit('verbose', `fetch: Installing ${target} to ${dest}`);
+             events.emit('verbose', `fetch: Installing ${target} to ${dest}`);
 -            return superspawn.spawn('npm', args, { cwd: dest });
-+            events.emit('verbose', `fetch: Installing ${name} to ${dest}`);
 +            return superspawn.spawn('npm', args, { cwd: dest, stdio: 'inherit' });
          })
--
+ 
          // Resolve path to installed package
          .then(getTargetPackageSpecFromNpmInstallOutput)
          .then(spec => pathToInstalledPackage(spec, dest));
@@ -30,29 +26,18 @@ index 4853e2a..08e26cb 100644
      const opts = Object.assign({ production: true }, userOptions);
  
 -    const args = ['install', target];
--
--    if (opts.production) {
--        args.push('--production');
--    }
--    if (opts.save_exact) {
--        args.push('--save-exact');
--    } else if (opts.save) {
--        args.push('--save');
--    } else {
--        args.push('--no-save');
--    }
 +    const args = ['-ddd', 'install', target];
-+
-+    //if (opts.production) {
-+    //    args.push('--production');
-+    //}
-+    //if (opts.save_exact) {
-+    //    args.push('--save-exact');
-+    //} else if (opts.save) {
-+    //    args.push('--save');
-+    //} else {
-+    //    args.push('--no-save');
-+    //}
+ 
+     if (opts.production) {
+         args.push('--production');
+     }
+     if (opts.save_exact) {
+         args.push('--save-exact');
+     } else if (opts.save) {
+         args.push('--save');
+     } else {
+         args.push('--no-save');
+     }
      return args;
  }
  
