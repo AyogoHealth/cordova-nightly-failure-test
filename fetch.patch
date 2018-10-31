@@ -1,5 +1,5 @@
 diff --git index.js index.js
-index 4853e2a..cd4ffd3 100644
+index 4853e2a..08e26cb 100644
 --- index.js
 +++ index.js
 @@ -56,17 +56,18 @@ module.exports = function (target, dest, opts = {}) {
@@ -41,7 +41,7 @@ index 4853e2a..cd4ffd3 100644
 -    } else {
 -        args.push('--no-save');
 -    }
-+    const args = ['--verbose', 'install', target];
++    const args = ['-ddd', 'install', target];
 +
 +    //if (opts.production) {
 +    //    args.push('--production');
