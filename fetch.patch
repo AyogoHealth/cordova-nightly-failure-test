@@ -1,32 +1,19 @@
 diff --git index.js index.js
-index 4853e2a..0c4d945 100644
+index 4853e2a..a5be094 100644
 --- index.js
 +++ index.js
-@@ -54,6 +54,8 @@ module.exports = function (target, dest, opts = {}) {
-         });
- };
- 
-+var modulecount = 0;
-+
- // Installs the package specified by target and returns the installation path
- function installPackage (target, dest, opts) {
-     return isNpmInstalled()
-@@ -64,7 +66,13 @@ function installPackage (target, dest, opts) {
+@@ -64,9 +64,8 @@ function installPackage (target, dest, opts) {
          .then(_ => npmArgs(target, opts))
          .then(args => {
              events.emit('verbose', `fetch: Installing ${target} to ${dest}`);
 -            return superspawn.spawn('npm', args, { cwd: dest });
-+            return superspawn.spawn('npm', args, { cwd: dest, stdio: ['pipe', 'pipe', 1] });
-+        })
-+
-+        .then(output => {
-+            fs.writeFileSync(`npm-${modulecount++}.log`, output, { encoding: 'utf8' });
-+
-+            return output;
++            return superspawn.spawn('npm', args, { cwd: dest, stdio: 'inherit' });
          })
- 
+-
          // Resolve path to installed package
-@@ -75,7 +83,7 @@ function installPackage (target, dest, opts) {
+         .then(getTargetPackageSpecFromNpmInstallOutput)
+         .then(spec => pathToInstalledPackage(spec, dest));
+@@ -75,7 +74,7 @@ function installPackage (target, dest, opts) {
  function npmArgs (target, userOptions) {
      const opts = Object.assign({ production: true }, userOptions);
  
