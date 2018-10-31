@@ -1,16 +1,8 @@
 diff --git index.js index.js
-index 4853e2a..08e26cb 100644
+index 4853e2a..fd0892f 100644
 --- index.js
 +++ index.js
-@@ -56,17 +56,18 @@ module.exports = function (target, dest, opts = {}) {
- 
- // Installs the package specified by target and returns the installation path
- function installPackage (target, dest, opts) {
-     return isNpmInstalled()
-         // Ensure that `npm` installs to `dest` and not any of its ancestors
-         .then(_ => fs.ensureDir(path.join(dest, 'node_modules')))
- 
-         // Run `npm` to install requested package
+@@ -64,7 +64,7 @@ function installPackage (target, dest, opts) {
          .then(_ => npmArgs(target, opts))
          .then(args => {
              events.emit('verbose', `fetch: Installing ${target} to ${dest}`);
@@ -19,9 +11,7 @@ index 4853e2a..08e26cb 100644
          })
  
          // Resolve path to installed package
-         .then(getTargetPackageSpecFromNpmInstallOutput)
-         .then(spec => pathToInstalledPackage(spec, dest));
-@@ -75,18 +76,18 @@ function installPackage (target, dest, opts) {
+@@ -75,7 +75,7 @@ function installPackage (target, dest, opts) {
  function npmArgs (target, userOptions) {
      const opts = Object.assign({ production: true }, userOptions);
  
@@ -30,14 +20,3 @@ index 4853e2a..08e26cb 100644
  
      if (opts.production) {
          args.push('--production');
-     }
-     if (opts.save_exact) {
-         args.push('--save-exact');
-     } else if (opts.save) {
-         args.push('--save');
-     } else {
-         args.push('--no-save');
-     }
-     return args;
- }
- 
