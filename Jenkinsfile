@@ -8,7 +8,6 @@ stage('build') {
 
         def seyConfig = []
         seyConfig << "SEY_VERBOSE=1"
-        seyConfig << "SEY_NOBROWSERIFY=1"
 
         withEnv(seyConfig) {
             sh "npx seymour"

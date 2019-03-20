@@ -1,19 +1,6 @@
 {
     "name": "cordova-nightly-failure-test",
     "version": "1.0.0",
-    "dependencies": {
-        "cordova-android": "^7.1.0",
-        "cordova-android-disable-aapt2": "^1.0.0",
-        "cordova-ios": "github:AyogoHealth/cordova-ios#CB-13143",
-        "cordova-plugin-ayogo-push": "github:AyogoHealth/cordova-plugin-ayogo-push",
-        "cordova-plugin-code-push": "^1.11.9",
-        "cordova-plugin-device": "^2.0.1",
-        "cordova-plugin-dialogs": "^2.0.1",
-        "cordova-plugin-file": "^6.0.0",
-        "cordova-plugin-file-transfer": "^1.7.0",
-        "cordova-plugin-whitelist": "^1.3.3",
-        "cordova-plugin-zip": "^3.1.0"
-    },
     "cordova": {
         "platforms": [
             "android",
@@ -35,6 +22,17 @@
         }
     },
     "devDependencies": {
-        "seymour": "^4.0.0"
+        "cordova-android": "^7.1.0",
+        "cordova-android-disable-aapt2": "^1.0.0",
+        "cordova-ios": "github:AyogoHealth/cordova-ios#CB-13143",
+        "cordova-plugin-ayogo-push": "github:AyogoHealth/cordova-plugin-ayogo-push",
+        "cordova-plugin-code-push": "^1.11.9",
+        "cordova-plugin-device": "^2.0.1",
+        "cordova-plugin-dialogs": "^2.0.1",
+        "cordova-plugin-file": "^6.0.0",
+        "cordova-plugin-file-transfer": "^1.7.0",
+        "cordova-plugin-whitelist": "^1.3.3",
+        "cordova-plugin-zip": "^3.1.0",
+        "seymour": "^4.0.1"
     }
 }
